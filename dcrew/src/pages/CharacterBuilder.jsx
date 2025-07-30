@@ -30,6 +30,7 @@ const partyPos = {
 const CharacterBuilder = () => {
   const [selectRace, setSelectedRace] = useState('');
   const [selectClass, setSelectedClass] = useState('');
+  const [name, setName] = useState('');
 
   const races = Object.keys(partyPos);
   const classes = selectRace
@@ -50,7 +51,7 @@ const CharacterBuilder = () => {
     const { data, error } = await supabase
     .from("Characters")
     .insert({
-      name: character.name,
+      name: name,
       race: selectRace,
       class: selectClass,
       x: position.x,
@@ -70,35 +71,47 @@ const CharacterBuilder = () => {
   return (
     <div className="create-container">
         <div className="create"> 
-            <Sprite x={0} y={0}/>
-            <select
-                value={selectRace}
-                onChange={(e) => {
-                setSelectedRace(e.target.value);
-                setSelectedClass(""); // reset class when race changes
-                }}
-            >
-                <option value="">Select Race</option>
-                {races.map((race) => (
-                <option key={race} value={race}>
-                    {race}
-                </option>
-                ))}
-            </select>
+            <div style={{ transform: 'translate(-30px, -50px)' }}>
+                <Sprite x={0} y={0}/>
+            </div>
+            
+            <div className="form-elements">
+                <input
+                    type="text"
+                    placeholder="Enter character name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                />
+                <select
+                    value={selectRace}
+                    onChange={(e) => {
+                    setSelectedRace(e.target.value);
+                    setSelectedClass(""); // reset class when race changes
+                    }}
+                >
+                    <option value="">Select Race</option>
+                    {races.map((race) => (
+                    <option key={race} value={race}>
+                        {race}
+                    </option>
+                    ))}
+                </select>
 
-            <select
-                value={selectClass}
-                onChange={(e) => setSelectedClass(e.target.value)}
-                disabled={!selectRace} // disable if no race selected
-            >
-                <option value="">Select Class</option>
-                {classes.map((cls) => (
-                <option key={cls} value={cls}>
-                    {cls}
-                </option>
-                ))}
-            </select>
-            <input type="submit" value="Submit" onClick={createChar} />
+                <select
+                    value={selectClass}
+                    onChange={(e) => setSelectedClass(e.target.value)}
+                    disabled={!selectRace} // disable if no race selected
+                >
+                    <option value="">Select Class</option>
+                    {classes.map((cls) => (
+                    <option key={cls} value={cls}>
+                        {cls}
+                    </option>
+                    ))}
+                </select>
+                <input type="submit" value="Submit" onClick={createChar} />
+            </div>
         </div>
     </div>
   )
