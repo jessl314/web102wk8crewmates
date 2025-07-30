@@ -1,6 +1,44 @@
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background: #f9f9f9;
+}
+
 .char-card {
-    background-color: lightgray;
-    padding: 40px;
-    align-items: center;
-    justify-content: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 16px;
+  text-align: center;
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  cursor: pointer;
+  padding: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.char-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.char-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.char-card p {
+  margin: 0 0 12px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Optional: size and center the sprite inside the card */
+.char-card > div {
+  margin: 10px;
+  width: 72px;
+  height: 72px;
 }
