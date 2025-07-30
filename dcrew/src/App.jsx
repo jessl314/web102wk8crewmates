@@ -12,17 +12,13 @@ function App() {
 
   return (
     <Router>
-
-        {loading && <p>Loading objects on display...</p>}
-        {error && <p>Error: {error}</p>}
-        {!loading && !error && (
+        <NavBar/>
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/creator" element={<CharacterBuilder/>}/>
           <Route path="/party" element={<Party/>}/>
           <Route path="/character/:id" element={<CharDetail/>}/>
         </Routes>
-        )}
     </Router>
   )
 }
